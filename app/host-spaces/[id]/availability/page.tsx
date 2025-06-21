@@ -1,4 +1,3 @@
-// app/host/spaces/[id]/availability/page.tsx
 import { fetchSpaceById } from '@/lib/api/spaces';
 import AvailabilityForm from '@/components/host/AvailabilityForm';
 
