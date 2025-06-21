@@ -4,6 +4,9 @@ import { useRouter, usePathname } from 'next/navigation'
 import { useDispatch } from 'react-redux'
 import type { AppDispatch } from '@/store/store'
 import { login, signup } from '@/store/authSlice'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
 
 export default function AuthForm() {
   const pathname = usePathname()
@@ -37,52 +40,50 @@ export default function AuthForm() {
       {error && <div className="text-error-light dark:text-error-dark">{error}</div>}
       {isSignup && (
         <div>
-          <label htmlFor="name" className="block mb-1">Name</label>
-          <input
+          <Label htmlFor="name">Name</Label>
+          <Input
             type="text"
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-3 py-2 border rounded bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark border-border-light dark:border-border-dark"
             required
           />
         </div>
       )}
       <div>
-        <label htmlFor="email" className="block mb-1">Email</label>
-        <input
+        <Label htmlFor="email">Email</Label>
+        <Input
           type="email"
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-3 py-2 border rounded bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark border-border-light dark:border-border-dark"
           required
         />
       </div>
       <div>
-        <label htmlFor="password" className="block mb-1">Password</label>
-        <input
+        <Label htmlFor="password">Password</Label>
+        <Input
           type="password"
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-3 py-2 border rounded bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark border-border-light dark:border-border-dark"
           required
         />
       </div>
-      <button type="submit" className="w-full bg-primary-light dark:bg-primary-dark text-white py-2 rounded hover:bg-accent-light dark:hover:bg-accent-dark hover:cursor-pointer">
+      <Button type="submit" className="w-full">
         {isSignup ? 'Sign Up' : 'Sign In'}
-      </button>
+      </Button>
       <div className="text-center">
-        <button
+        <Button
           type="button"
-          className="text-accent-light dark:text-accent-dark hover:underline bg-transparent border-none outline-none cursor-pointer"
+          variant="link"
+          className="p-0 h-auto"
           onClick={() => {
             router.push(isSignup ? '/auth/sign-in' : '/auth/sign-up')
           }}
         >
           {isSignup ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
-        </button>
+        </Button>
       </div>
     </form>
   )
