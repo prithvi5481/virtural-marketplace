@@ -3,13 +3,15 @@ import { Space, AvailabilitySlot } from '@/types/spaces';
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const fetchSpaces = async (filters = {}): Promise<Space[]> => {
-  const stringifiedFilters: Record<string, string> = {};
-  Object?.entries(filters).forEach(([key, value]) => {
-    if (typeof value !== 'undefined' && typeof value !== 'symbol') {
-      stringifiedFilters[key] = String(value);
+  const params = new URLSearchParams();
+  Object.entries(filters).forEach(([key, value]) => {
+    if (typeof value === 'undefined') return;
+    if (Array.isArray(value)) {
+      value.forEach((v) => params.append(key, v));
+    } else {
+      params.append(key, String(value));
     }
   });
-  const params = new URLSearchParams(stringifiedFilters);
   const response = await fetch(`${API_URL}/spaces?${params}`);
   return response.json();
 };

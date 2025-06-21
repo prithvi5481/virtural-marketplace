@@ -4,8 +4,10 @@ import { fetchSpaces } from '@/lib/api/spaces';
 export default async function SpacesPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | string[] | undefined }
 }) {
+  // searchParams is a plain object in Next.js App Router
+  console.log('Search Params:', searchParams);
   const spaces = await fetchSpaces(searchParams);
 
   return (

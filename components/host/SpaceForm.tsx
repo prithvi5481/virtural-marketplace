@@ -6,7 +6,7 @@ import { createSpace } from '@/lib/api/spaces';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-export default function SpaceForm() {
+export default function SpaceForm({space, isEditing } : { space?: any, isEditing?: boolean }) {
   const { handleSubmit } = useForm();
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
